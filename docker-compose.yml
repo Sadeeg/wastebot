@@ -1,0 +1,10 @@
+services:
+  wastebot:
+    build: .
+    env_file: .env
+    volumes:
+      - wastebot_data:/data
+    restart: unless-stopped
+
+volumes:
+  wastebot_data:
