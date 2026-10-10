@@ -20,7 +20,10 @@ def init_db():
     return conn
 
 def fetch_ics():
-    r = requests.get(ICS_URL, timeout=15)
+    url = ICS_URL
+    if url.startswith('webcal://'):
+        url = 'https://' + url[len('webcal://'):]
+    r = requests.get(url, timeout=15)
     r.raise_for_status()
     return Calendar.from_ical(r.content)
 
